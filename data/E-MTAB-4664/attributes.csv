@@ -1,0 +1,37 @@
+Source Name,Characteristics[age],Characteristics[sex],Characteristics[individual],Characteristics[environmental stress],Assay Name
+Sample 9,20,male,9,normal sleep,9297962113_R03C02
+Sample 8,28,male,6,total acute sleep deprivation,9297962113_R02C02
+Sample 7,28,male,6,normal sleep,9297962113_R01C02
+Sample 6,25,male,5,total acute sleep deprivation,9297962113_R06C01
+Sample 5,25,male,5,normal sleep,9297962113_R05C01
+Sample 4,23,male,4,total acute sleep deprivation,9297962113_R04C01
+Sample 36,20,male,24,total acute sleep deprivation,9297962042_R06C02
+Sample 35,20,male,24,normal sleep,9297962042_R05C02
+Sample 34,21,male,23,total acute sleep deprivation,9297962042_R04C02
+Sample 33,21,male,23,normal sleep,9297962042_R03C02
+Sample 32,26,male,22,total acute sleep deprivation,9297962042_R06C01
+Sample 31,26,male,22,normal sleep,9297962042_R05C01
+Sample 30,27,male,21,total acute sleep deprivation,9297962042_R04C01
+Sample 3,23,male,4,normal sleep,9297962113_R03C01
+Sample 29,27,male,21,total acute sleep deprivation,9297962042_R03C01
+Sample 28,26,male,20,normal sleep,9297962042_R02C02
+Sample 27,26,male,20,normal sleep,9297962042_R02C01
+Sample 26,26,male,20,total acute sleep deprivation,9297962042_R01C02
+Sample 25,26,male,20,normal sleep,9297962042_R01C01
+Sample 24,23,male,19,total acute sleep deprivation,9297962119_R06C02
+Sample 23,23,male,19,normal sleep,9297962119_R05C02
+Sample 22,22,male,18,total acute sleep deprivation,9297962119_R04C02
+Sample 21,22,male,18,normal sleep,9297962119_R03C02
+Sample 20,19,male,17,total acute sleep deprivation,9297962119_R06C01
+Sample 2,31,male,3,total acute sleep deprivation,9297962113_R02C01
+Sample 19,19,male,17,normal sleep,9297962119_R05C01
+Sample 18,19,male,14,total acute sleep deprivation,9297962119_R04C01
+Sample 17,19,male,14,total acute sleep deprivation,9297962119_R03C01
+Sample 16,21,male,11,normal sleep,9297962119_R02C02
+Sample 15,21,male,11,normal sleep,9297962119_R02C01
+Sample 14,21,male,11,total acute sleep deprivation,9297962119_R01C02
+Sample 13,21,male,11,normal sleep,9297962119_R01C01
+Sample 12,22,male,10,total acute sleep deprivation,9297962113_R06C02
+Sample 11,22,male,10,normal sleep,9297962113_R05C02
+Sample 10,20,male,9,total acute sleep deprivation,9297962113_R04C02
+Sample 1,31,male,3,normal sleep,9297962113_R01C01
