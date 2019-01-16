@@ -1,5 +1,7 @@
 suppressPackageStartupMessages(library('methylumi'))
 suppressPackageStartupMessages(library('lumi'))
+source("./lib/asmn/norm_factors.R")
+source("./lib/asmn/normalize_asmn.R")
 
 # Read idat files
 readIdats = function(resource_name){
@@ -25,3 +27,6 @@ convertBeta2M = function(beta){
   return(m)
 }
 
+normalize = function(){
+  
+}
