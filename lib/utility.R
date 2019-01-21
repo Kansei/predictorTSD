@@ -16,7 +16,7 @@ readIdats = function(resource_name){
 # Convert sleep status to 0 or 1
 convertSleepStatus2Num = function(attributes_data){
   sorted_data <- attributes_data[order(attributes_data$Assay.Name),]
-  converted_data <- as.numeric(sorted_data[1] == "total acute sleep deprivation") 
+  converted_data <- as.numeric(sorted_data[1] == "total acute sleep deprivation")
 
   return(converted_data)
 }
@@ -27,6 +27,20 @@ convertBeta2M = function(beta){
   return(m)
 }
 
-normalize = function(){
-  
+# all sample normalize
+normalize = function(idats){
+  normfactors <- norm_factors(controldata = NULL, subjects = NULL, methylumidata = idats, type = "methylumi")
+  normdata <- normalize_asmn(normfactors = normfactors, rawdata = NULL, featuredata = NULL, methylumidata = idats, type = "methylumi")
+  return(normdata)
 }
+
+# except nan, inf
+exceptMissingValue = function(X){
+  cpg_num <- length(X[,1])
+  nan <- which(is.nan(X)) %% 485577
+  inf <- which(is.infinite(X)) %% 485577
+  missing_value <- sort(unique(c(nan,inf)))
+  excepted_X <- X[-missing_value, ]
+  return(excepted_X)
+}
+
