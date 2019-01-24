@@ -16,4 +16,6 @@ Y <- convertSleepStatus2Num(attributes_data[5:6])
 
 result <- model.lassoBinomial.cv(X, Y)
 
-coef(result, s="lambda.min")
+paramater <- coef(result, s="lambda.min")
+
+paramater[which(paramater != 0),1]
