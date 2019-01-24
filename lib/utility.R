@@ -44,3 +44,16 @@ exceptMissingValue = function(X){
   return(excepted_X)
 }
 
+# split test and train data
+trainTestSplit = functoin(X, Y, test_size_rate){
+  data_size <- length(Y)
+  test_size <- as.integer(data_size*test_size_rate)
+  train_size <- data_size - test_size
+  
+  train_X <- X[1:train_size]
+  test_X <- X[train_size+1:data_size]
+  train_Y <- Y[1:train_size]
+  test_Y <- Y[ttest_size+1:data_size]
+  
+  return(list(train_X, test_X, train_Y, test_Y))
+}
