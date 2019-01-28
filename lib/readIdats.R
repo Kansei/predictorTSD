@@ -8,5 +8,8 @@ idatPath <- paste(resource_path, "/idat", sep = "")
 barcodes <- scan(paste(resource_path, "/barcodes.txt", sep = ""), what = character(), sep = "\n")
 idats <- methylumIDAT(barcodes = barcodes, idatPath=idatPath)
 
-saveRDS(idats, file=paste(resource_path, ".rdata", sep = ""))
+rdata_name <- paste(resource_name, ".rdata", sep = "")
+rdata_path <- paste("./rdata/", rdata_name, sep = "")
+
+saveRDS(idats, file = rdata_path)
 
