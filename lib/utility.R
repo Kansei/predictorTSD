@@ -4,12 +4,10 @@ source("./lib/asmn/norm_factors.R")
 source("./lib/asmn/normalize_asmn.R")
 
 # Read idat files
-readIdats = function(resource_name){
-  resource_path <- paste("./data/", resource_name, sep = "")
-  idatPath <- paste(resource_path, "/idat", sep = "")
-  barcodes <- scan(paste(resource_path, "/barcodes.txt", sep = ""), what = character(), sep = "\n")
-  idats <- methylumIDAT(barcodes = barcodes, idatPath=idatPath)
-
+readIdatsObj = function(resource_name){
+  rdata_name <- paste(resource_name, ".rdata", sep = "")
+  rdata_path <- paste("./rdata/", rdata_name, sep = "")
+  idats <- readRDS(rdata_path)
   return(idats)
 }
 
