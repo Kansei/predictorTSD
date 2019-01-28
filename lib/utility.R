@@ -4,12 +4,10 @@ source("./lib/asmn/norm_factors.R")
 source("./lib/asmn/normalize_asmn.R")
 
 # Read idat files
-readIdats = function(resource_name){
-  resource_path <- paste("./data/", resource_name, sep = "")
-  idatPath <- paste(resource_path, "/idat", sep = "")
-  barcodes <- scan(paste(resource_path, "/barcodes.txt", sep = ""), what = character(), sep = "\n")
-  idats <- methylumIDAT(barcodes = barcodes, idatPath=idatPath)
-
+readIdatsObj = function(resource_name){
+  rdata_name <- paste(resource_name, ".rdata", sep = "")
+  rdata_path <- paste("./rdata/", rdata_name, sep = "")
+  idats <- readRDS(rdata_path)
   return(idats)
 }
 
@@ -44,3 +42,15 @@ exceptMissingValue = function(X){
   return(excepted_X)
 }
 
+# split test and train data
+trainTestSplit = function(X, Y, test_size_rate){
+  data_size <- length(Y)
+  test_size <- as.integer(data_size*test_size_rate)
+  
+  test_Y <- Y[1:test_size]
+  train_Y <- Y[(test_size+1):data_size]
+  test_X <- X[1:test_size,]
+  train_X <- X[(test_size+1):data_size,]
+  
+  return(list(train_Y, test_Y, train_X, test_X))
+}
