@@ -1,2 +1,2 @@
 *.idat
-./rdata/*.rdata
+rdata/*.rdata
