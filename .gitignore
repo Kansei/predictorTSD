@@ -1,2 +1,4 @@
 *.idat
 models/*.rmodel
+rdata/*.rdata
+
