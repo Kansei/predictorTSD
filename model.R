@@ -12,8 +12,15 @@ model.lassoBinomial = function(x, y){
 }
 
 model.bootLasso = function(x, y, B){
-  result <- bootLasso(x, y, B = B)
+  result <- bootLasso(x, y, B = B, intercept = TRUE)
   return(result)
 }
 
-
+model.function = function(model_name){
+  switch(model_name,
+         "lassoBinomal.cv" = model.lassoBinomial.cv,
+         "lassoBinomal" = model.lassoBinomial,
+         "bootLasso" = model.bootLasso,
+         NULL
+         )
+}
