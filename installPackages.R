@@ -4,3 +4,5 @@ biocLite("methylumi")
 install.packages("glmnet")
 install.packages("glm2")
 install.packages("HDCI")
+install.packages("ROCR")
+
