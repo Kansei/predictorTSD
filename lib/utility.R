@@ -75,3 +75,11 @@ trainTestSplit = function(X, Y, test_size_rate){
   
   return(list(train_Y, test_Y, train_X, test_X))
 }
+
+rocAUC = function(prediction){ 
+  perf <- performance(prediction, "tpr", "fpr")
+  plot(perf)
+  auc.tmp <- performance(prediction,"auc")
+  auc <- as.numeric(auc.tmp@y.values)
+  return(auc)
+}
