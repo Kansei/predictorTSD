@@ -1,5 +1,8 @@
-suppressPackageStartupMessages(library('methylumi'))
-suppressPackageStartupMessages(library('lumi'))
+library(methylumi)
+library(lumi)
+library(gplots)
+library(ROCR)
+library(boot)
 source("./lib/asmn/norm_factors.R")
 source("./lib/asmn/normalize_asmn.R")
 
@@ -38,10 +41,12 @@ convertBeta2M = function(beta){
   return(m)
 }
 
-# All sample normalize
+# All sample mean normalize
 normalize = function(idats){
-  normfactors <- norm_factors(controldata = NULL, subjects = NULL, methylumidata = idats, type = "methylumi")
-  normdata <- normalize_asmn(normfactors = normfactors, rawdata = NULL, featuredata = NULL, methylumidata = idats, type = "methylumi")
+  # Create normalization factors.
+  normfactors <- norm_factors(methylumidata = idats, type = "methylumi", controldata = NULL)
+  # Perform all sample mean normalization.
+  normdata <- normalize_asmn(normfactors = normfactors, methylumidata = idats, type = "methylumi", rawdata = NULL)
   return(normdata)
 }
 
@@ -51,6 +56,9 @@ exceptMissingValue = function(X){
   nan <- which(is.nan(X)) %% cpg_num
   inf <- which(is.infinite(X)) %% cpg_num
   missing_value <- sort(unique(c(nan,inf)))
+  if(missing_value[1] == 0){
+    missing_value[1] <- cpg_num
+  }
   excepted_X <- X[-missing_value, ]
   return(excepted_X)
 }
