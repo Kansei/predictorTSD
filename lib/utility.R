@@ -76,6 +76,20 @@ trainTestSplit = function(X, Y, test_size_rate){
   return(list(train_Y, test_Y, train_X, test_X))
 }
 
+preprocessingIdats = function(idats){
+  # Perform all sample mean normalization
+  norm_idats <- normalize(idats)
+  # Pick out Beta-value from idats
+  beta_value <- norm_idats@assayData[["betas"]]
+  # Convert beta-value to M-value
+  m_value <- convertBeta2M(beta_value)
+  # Except missing value
+  excepted_m_value <- exceptMissingValue(m_value)
+  # Transpose matrix to reformat (barcode_name x cpg_sites)
+  X <- t(excepted_m_value)
+  return(X)
+}
+
 rocAUC = function(prediction){ 
   perf <- performance(prediction, "tpr", "fpr")
   plot(perf)
