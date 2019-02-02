@@ -21,12 +21,14 @@ train_Y <- Y[(test_size+1):data_size]
 test_X <- X[1:test_size,]
 train_X <- X[(test_size+1):data_size,]
 
-# Choose model
-model_name = "bootLasso"
-model <- model.function(model_name)
-result <- model(train_X, train_Y,B = 100)
+# which_coef <- boLasso(train_X, train_Y, 10)
 
-pred.glm <- predict.glm(glm.output, newdata = data.frame(test_X[, selected_coef_position]) ,type = "response")
+# Choose model
+model_name = "logistic"
+model <- model.function(model_name)
+result <- model(train_X, train_Y)
+
+pred.glm <- predict.glm(result, newdata = data.frame(test_X) ,type = "response")
 auc <- rocAUC(pred.glm, test_Y)
 print("AUC")
 print(auc)
