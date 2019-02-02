@@ -2,20 +2,18 @@ source("./lib/utility.R")
 source("./model.R")
 
 resource_name = 'E-MTAB-4664'
+# Read idats object
 idats <- readIdatsObj(resource_name)
+# Data preprocessing
+X <- preprocessingIdats(idats)
 
-# To reformat matrix (barcode_name x cpg_sites)
-norm_idats <- normalize(idats)
-beta_value <- norm_idats@assayData[["betas"]]
-m_value <- convertBeta2M(beta_value)
-excepted_m_value <- exceptMissingValue(m_value)
-X <- t(excepted_m_value)
-
+# Read sample's attribute csv file
 attributes_data <- read.csv(paste("./data/", resource_name ,"/attributes.csv", sep = ""))
+# Convert sleep status to 0/1
 Y <- convertSleepStatus2Num(attributes_data[5:6])
 
-# split test and train data
-test_size_rate <- 0.3
+# Split test and train data
+test_size_rate = 0.3
 data_size <- length(Y)
 test_size <- as.integer(data_size*test_size_rate)
 test_Y <- Y[1:test_size]
@@ -23,12 +21,14 @@ train_Y <- Y[(test_size+1):data_size]
 test_X <- X[1:test_size,]
 train_X <- X[(test_size+1):data_size,]
 
-model_name <- "bootLasso"
+# Choose model
+model_name = "bootLasso"
 model <- model.function(model_name)
-result <- model(train_X, train_Y,B = 10)
+result <- model(train_X, train_Y,B = 100)
 
-# paramater <- coef(result, s="lambda.min")
-# paramater[which(paramater != 0), 1]
+pred.glm <- predict.glm(glm.output, newdata = data.frame(test_X[, selected_coef_position]) ,type = "response")
+auc <- rocAUC(pred.glm, test_Y)
+print("AUC")
+print(auc)
 
-saveModel(result)
-
+# saveModel(result)

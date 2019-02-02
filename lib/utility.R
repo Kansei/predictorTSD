@@ -90,10 +90,11 @@ preprocessingIdats = function(idats){
   return(X)
 }
 
-rocAUC = function(prediction){ 
-  perf <- performance(prediction, "tpr", "fpr")
+rocAUC = function(predicted, y){ 
+  pred <- prediction(predicted, y)
+  perf <- performance(pred, "tpr", "fpr")
   plot(perf)
-  auc.tmp <- performance(prediction,"auc")
+  auc.tmp <- performance(pred,"auc")
   auc <- as.numeric(auc.tmp@y.values)
   return(auc)
 }
