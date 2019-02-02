@@ -1,2 +1,5 @@
 *.idat
+models/*.rmodel
 rdata/*.rdata
+.RData
+.Rhistory
