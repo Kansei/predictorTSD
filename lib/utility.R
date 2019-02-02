@@ -3,6 +3,7 @@ library(lumi)
 library(gplots)
 library(ROCR)
 library(boot)
+library(HDCI)
 source("./lib/asmn/norm_factors.R")
 source("./lib/asmn/normalize_asmn.R")
 
@@ -55,11 +56,13 @@ exceptMissingValue = function(X){
   cpg_num <- length(X[,1])
   nan <- which(is.nan(X)) %% cpg_num
   inf <- which(is.infinite(X)) %% cpg_num
-  missing_value <- sort(unique(c(nan,inf)))
-  if(missing_value[1] == 0){
-    missing_value[1] <- cpg_num
+  except_cpg <- sort(unique(c(nan,inf)))
+  if(except_cpg[1] == 0){
+    except_cpg[1] <- cpg_num
   }
-  excepted_X <- X[-missing_value, ]
+  print("number of except CpG site")
+  print(length(except_cpg))
+  excepted_X <- X[-except_cpg, ]
   return(excepted_X)
 }
 
@@ -88,6 +91,23 @@ preprocessingIdats = function(idats){
   # Transpose matrix to reformat (barcode_name x cpg_sites)
   X <- t(excepted_m_value)
   return(X)
+}
+
+boLasso = function(x, y, B){
+  result <- bootLasso(x, y, B = B, intercept = TRUE)
+  selected_coef_position <- which(result$Beta != 0)
+  if(length(selected_coef_position) == 0){
+    stop("failed train\n")
+  }
+  
+  print("CpG site:")
+  print(colnames(x[, selected_coef_position]))
+  print("Coef:")
+  print(result$Beta[selected_coef_position])
+  print("Interval:")
+  print(result$interval[1, selected_coef_position])
+  
+  return(selected_coef_position)
 }
 
 rocAUC = function(predicted, y){ 
