@@ -1,4 +1,4 @@
-Source Name,Characteristics[age],Characteristics[sex],Characteristics[individual],Characteristics[environmental stress],Assay Name
+Source Name,age,sex,individual,environmental stress,Assay Name
 Sample 9,20,male,9,normal sleep,9297962113_R03C02
 Sample 8,28,male,6,total acute sleep deprivation,9297962113_R02C02
 Sample 7,28,male,6,normal sleep,9297962113_R01C02
