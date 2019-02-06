@@ -2,7 +2,9 @@ library(glmnet)
 library(glm2)
 
 model.lassoBinomial.cv = function(x, y){
-  result <- cv.glmnet(x, y, family="binomial", alpha=1, standardize = TRUE)
+  result <- cv.glmnet(x, y, family="binomial", alpha=1, standardize = TRUE, nfolds=10)
+  coef = coef(result, s = result$lambda.min)
+  print(colnames(x)[which(coef != 0)])
   return(result)
 }
 

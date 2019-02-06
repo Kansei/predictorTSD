@@ -125,11 +125,35 @@ allCpG = function(){
 
 cpgSelection.function = function(function_name){
   switch(function_name,
-         "bolasso" = boLasso,
+         "boLasso" = boLasso,
          "tsdSpecificCpG" = tsdSpecificCpG,
          "allCpG"= allCpG,
          NULL
          )
+}
+
+prediction.lassoBinomal = function(){
+  predicted <- predict.glmnet(learned_model, s="lambda.min", newx=test_X)
+  return(predicted)
+}
+
+prediction.lassoBinomal.cv = function(learned_model, test_X){
+  predicted <- predict.cv.glmnet(learned_model, s="lambda.min", newx=test_X)
+  return(predicted)
+}
+
+prediction.logistic = function(learned_model, test_X){
+  predicted <- predict.glm(learned_model, newdata = data.frame(test_X) ,type = "responise")
+  return(predicted)
+}
+
+prediction.function = function(function_name){
+  switch(function_name,
+    "lassoBinomal" = prediction.lassoBinomal,
+    "lassoBinomal.cv" = prediction.lassoBinomal.cv,
+    "logistic" = prediction.logistic,
+     NULL
+  )
 }
 
 rocAUC = function(predicted, y){
