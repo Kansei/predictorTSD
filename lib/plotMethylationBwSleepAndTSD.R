@@ -65,10 +65,18 @@ for(ncpg in 1:nrow(tsd_specific_cpgs)){
 
     tsd_m <- idats[which(all_assay_names == tsd_sample_name), which_cpg]
     sleep_m <- idats[which(all_assay_names == sleep_sample_name), which_cpg]
-    points(c(0,1), c(sleep_m, tsd_m), type="o", pch=nsample, col=nsample)
+
+    difference_m <- sleep_m - tsd_m
+    if(difference_m > 0){
+      color <- 1
+    } else {
+      color <- 2
+    }
+
+    points(c(0,1), c(sleep_m, tsd_m), type="o", pch=nsample, col=color)
   }
 
   par(xpd=T)
-  legend(par()$usr[2], par()$usr[4], legend = labels, title = "Sample Id",col = sample_range, pch = sample_range, bg = "transparent")
+  legend(par()$usr[2], par()$usr[4], legend = labels, title = "Sample Id", col = 1, pch = sample_range, bg = "transparent")
   dev.off()
 }
