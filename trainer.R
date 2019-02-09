@@ -1,5 +1,4 @@
-source("./lib/utility.R")
-source("./model.R")
+source("./header.R")
 
 resource_name = 'E-MTAB-4664'
 # Read idats object
@@ -21,15 +20,21 @@ train_Y <- Y[(test_size+1):data_size]
 test_X <- X[1:test_size,]
 train_X <- X[(test_size+1):data_size,]
 
-# which_coef <- boLasso(train_X, train_Y, 10)
+function_name = "tsdSpecificCpG"
+which_cpg <- cpgSelection.function(function_name)(colnames(train_X))
+# boLasso(train_X, train_Y, 10)
+# tsdSpecificCpG(colnames(train_X))
+# allCpG()
 
 # Choose model
+# logistic, lassoBinomal.cv, lassoBinomal, ridgeBinomial.cv, elasticNetBinomial.cv, adaptiveLassoBinomial.cv
 model_name = "logistic"
-model <- model.function(model_name)
-result <- model(train_X, train_Y)
+fit_model <- model.function(model_name)(train_X[, which_cpg], train_Y)
 
-pred.glm <- predict.glm(result, newdata = data.frame(test_X) ,type = "response")
-auc <- rocAUC(pred.glm, test_Y)
+predicted <- prediction.function(model_name)(fit_model, test_X[, which_cpg])
+print(predicted)
+
+auc <- rocAUC(predicted, test_Y)
 print("AUC")
 print(auc)
 
