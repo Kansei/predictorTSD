@@ -20,15 +20,16 @@ train_Y <- Y[(test_size+1):data_size]
 test_X <- X[1:test_size,]
 train_X <- X[(test_size+1):data_size,]
 
-function_name = "tsdSpecificCpG"
-which_cpg <- cpgSelection.function(function_name)(colnames(train_X))
+function_name = "allCpG"
+which_cpg <- cpgSelection.function(function_name)()
 # boLasso(train_X, train_Y, 10)
 # tsdSpecificCpG(colnames(train_X))
 # allCpG()
 
+
 # Choose model
 # logistic, lassoBinomal.cv, lassoBinomal, ridgeBinomial.cv, elasticNetBinomial.cv, adaptiveLassoBinomial.cv
-model_name = "logistic"
+model_name = "elasticNetBinomial.cv"
 fit_model <- model.function(model_name)(train_X[, which_cpg], train_Y)
 
 predicted <- prediction.function(model_name)(fit_model, test_X[, which_cpg])

@@ -40,3 +40,11 @@ rocAUC = function(predicted, y){
   auc <- as.numeric(auc.tmp@y.values)
   return(auc)
 }
+
+vec.include = function(v, query){
+  which_v <- c()
+  for(q in query){
+    which_v <- append(which_v, which(v == q))
+  }
+  return(which_v)
+}

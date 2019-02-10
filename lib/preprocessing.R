@@ -24,9 +24,16 @@ normalize = function(idats){
 # Except nan, inf
 exceptMissingValue = function(X){
   cpg_num <- length(X[,1])
+  na <- which(is.na(X)) %% cpg_num
   nan <- which(is.nan(X)) %% cpg_num
   inf <- which(is.infinite(X)) %% cpg_num
-  except_cpg <- sort(unique(c(nan,inf)))
+  
+  if((length(na) == 0)&&(length(nan) == 0)&&(length(inf) == 0)){
+    print("except CpG is nothing")
+    return(X)
+  }
+  
+  except_cpg <- sort(unique(c(na,nan,inf)))
   if(except_cpg[1] == 0){
     except_cpg[1] <- cpg_num
   }
@@ -36,16 +43,22 @@ exceptMissingValue = function(X){
   return(excepted_X)
 }
 
+standardize = function(data){
+  return(scale(data))
+}
+
 preprocessingIdats = function(idats){
   # Perform all sample mean normalization
   norm_idats <- normalize(idats)
+  #norm_idats <- idats
   # Pick out Beta-value from idats
   beta_value <- norm_idats@assayData[["betas"]]
   # Convert beta-value to M-value
   m_value <- convertBeta2M(beta_value)
+  # m_value <- beta_value
   # Except missing value
   excepted_m_value <- exceptMissingValue(m_value)
   # Transpose matrix to reformat (barcode_name x cpg_sites)
-  X <- t(excepted_m_value)
+  X <- standardize(t(excepted_m_value))
   return(X)
 }
