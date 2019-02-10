@@ -1,5 +1,5 @@
 model.lassoBinomial.cv = function(x, y){
-  result <- cv.glmnet(x, y, family="binomial", alpha=1, standardize = TRUE, nfolds=10, type.measure="class")
+  result <- cv.glmnet(x, y, family="binomial", alpha=1, standardize = TRUE, nfolds=length(y), type.measure="class")
   print("lambda:")
   print(result$lambda.min)
   coef = coef(result, s = result$lambda.min)
@@ -13,7 +13,7 @@ model.lassoBinomial = function(x, y){
 }
 
 model.ridgeBinomial.cv = function(x, y){
-  result <- cv.glmnet(x, y, family="binomial", alpha=0, standardize = TRUE, nfolds=10, type.measure="class")
+  result <- cv.glmnet(x, y, family="binomial", alpha=0, standardize = TRUE, nfolds=length(y), type.measure="class")
   print("lambda:")
   print(result$lambda.min)
   coef = coef(result, s = result$lambda.min)
@@ -22,7 +22,7 @@ model.ridgeBinomial.cv = function(x, y){
 }
 
 model.elasticNetBinomial.cv = function(x, y){
-  result <- cv.glmnet(x, y, family="binomial", alpha=0.5, standardize = TRUE, nfolds=10, type.measure="class")
+  result <- cv.glmnet(x, y, family="binomial", alpha=0.5, standardize = TRUE, nfolds=length(y), type.measure="class")
   print("lambda:")
   print(result$lambda.min)
   coef = coef(result, s = result$lambda.min)
@@ -31,7 +31,7 @@ model.elasticNetBinomial.cv = function(x, y){
 }
 
 model.adaptiveLassoBinomial.cv = function(x, y){
-  fit.ridge.cv <- cv.glmnet(x, y, family="binomial", alpha=0, standardize = TRUE, nfolds=10, type.measure="class")
+  fit.ridge.cv <- cv.glmnet(x, y, family="binomial", alpha=0, standardize = TRUE, nfolds=length(y), type.measure="class")
   best_ridge_coef <- as.numeric(coef(fit.ridge.cv, s = fit.ridge.cv$lambda.min))[-1]
 
   result <- cv.glmnet(x, y, family="binomial", alpha=1, nfolds=10, penalty.factor = 1 / abs(best_ridge_coef))

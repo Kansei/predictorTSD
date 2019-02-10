@@ -15,17 +15,14 @@ plotMvalue = function(args){
       plot_cpg_ids <- append(plot_cpg_ids, all_cpg_ids[cpg])
     }
   } else if(args[1] == "tsd-specific"){
-    dir <- "tsd-specific/"
+    dir <- "beta/standardize/"
     plot_cpg_ids <- scan("./data/DifferentiallyMethylatedProbes.txt", what = character(), sep = "\n")
   } else {
     dir <- "custom/"
     plot_cpg_ids <- args
   }
 
-  which_tsd_cpgs <- c()
-  for(cpg_id in plot_cpg_ids){
-    which_tsd_cpgs <- append(which_tsd_cpgs, which(all_cpg_ids == cpg_id))
-  }
+  which_tsd_cpgs <- vec.include(all_cpg_ids, plot_cpg_ids)
 
   plot_cpgs <- t(rbind(plot_cpg_ids, which_tsd_cpgs))
 
@@ -38,18 +35,10 @@ plotMvalue = function(args){
   sleep_samples <- sleep_samples[order(sleep_samples$individual),]
 
   except_tsd_samples <- c("9297962119_R04C01", "9297962119_R03C01", "9297962042_R04C01", "9297962042_R03C01")
-  which_except_tsd_sample <- c()
-  for(sample in except_tsd_samples){
-    which_except_tsd_sample <- append(which_except_tsd_sample, which(tsd_samples$Assay.Name == sample))
-  }
-  tsd_samples <- tsd_samples[-which_except_tsd_sample, ]
-
   except_sleep_samples <- c("9297962119_R02C02", "9297962119_R02C01", "9297962042_R02C02", "9297962042_R02C01")
-  which_except_sleep_sample <- c()
-  for(sample in except_sleep_samples){
-    which_except_sleep_sample <- append(which_except_sleep_sample, which(sleep_samples$Assay.Name == sample))
-  }
-  sleep_samples <- sleep_samples[-which_except_sleep_sample, ]
+
+  tsd_samples <- tsd_samples[-vec.include(tsd_samples$Assay.Name, except_tsd_samples), ]
+  sleep_samples <- sleep_samples[-vec.include(sleep_samples$Assay.Name, except_sleep_samples), ]
 
   for(ncpg in 1:nrow(plot_cpgs)){
     cpg_id <- as.character(plot_cpgs[ncpg, 1])
