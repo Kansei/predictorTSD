@@ -21,10 +21,13 @@ cpg_position = cpg_csv[2..-1].map do |cpg|
 end
 
 CSV.open( "./data/tsd_cpgs.csv", "w" ){ |csv|
-  csv << ["cpg id","coef","position"]
-  csv << [cpg_csv[1][1], cpg_csv[1][2], ""]
+  csv << ["cpg id", "coef", "chr", "position"]
+  csv << [cpg_csv[1][1], cpg_csv[1][2], "", ""]
   cpg_csv[2..-1].each_with_index do |cpg, i|
-    csv << [cpg[1], cpg[2], cpg_position[i]]
+    position = cpg_position[i].split(":")
+    chr = position[0]
+    position = position[1].split("-")[0].gsub(/(\d{0,3}),(\d{3})/, '\1\2').to_i
+    csv << [cpg[1], cpg[2], chr, position]
   end
 }
 

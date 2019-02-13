@@ -56,3 +56,22 @@ saveCoef = function(fit_model, cpg_ids){
   cpg <- t(rbind(cpg_ids, coef@x))
   write.csv(cpg, "./data/coef/coef.csv")
 }
+
+closestGene = function(){
+  cpg_data <- read.csv(paste0("./data/tsd_cpgs.csv"))[-1, ]
+  
+  cpg_id <- c()
+  gene <- c()
+  tss <- c()
+  distance <- c()
+  for(ncpg in 1:length(cpg_data[,1])){
+    cpg <- cpg_data[ncpg, ]
+    res <- findClosestGene(as.character(cpg$chr), cpg$position, genome="hg19", position="txStart")
+    cpg_id <- append(cpg_id, as.character(cpg$cpg.id))
+    gene <- append(gene, as.character(res$geneName[1]))
+    tss <- append(tss, res$txStart[1])
+    distance <- append(distance ,res$Distance[1])
+  }
+  cpg.data.frame <- data.frame(CpG.ID=cpg_id, Gene.Name=gene, TSS=tss, Distance=distance)
+  write.csv(cpg.data.frame, "./data/closest_gene_from_cpg.csv")
+}

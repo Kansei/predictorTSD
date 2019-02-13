@@ -7,7 +7,7 @@ idats <- readIdatsObj(resource_name)
 X <- preprocessingIdats(idats, n = F, s = F)
 
 # Read sample's attribute csv file
-attributes_data <- read.csv(paste("./data/", resource_name ,"/attributes.csv", sep = ""))
+attributes_data <- read.csv(paste0("./data/", resource_name ,"/attributes.csv"))
 # Convert sleep status to 0/1
 Y <- convertSleepStatus2Num(attributes_data[5:6])
 
