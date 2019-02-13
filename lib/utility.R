@@ -48,3 +48,11 @@ vec.include = function(v, query){
   }
   return(which_v)
 }
+
+saveCoef = function(fit_model, cpg_ids){
+  coef = coef(fit_model, s = fit_model$lambda.min)
+  cpg_ids <- cpg_ids[which(coef[-1] != 0)]
+  cpg_ids <- c("intercept",cpg_ids)
+  cpg <- t(rbind(cpg_ids, coef@x))
+  write.csv(cpg, "./data/coef/coef.csv")
+}

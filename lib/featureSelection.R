@@ -1,3 +1,5 @@
+source("./lib/wilcoxonSignedRankTest.R")
+
 boLasso = function(x, y, B){
   result <- bootLasso(x, y, B = B, intercept = TRUE)
   selected_coef_position <- which(result$Beta != 0)
@@ -33,6 +35,7 @@ cpgSelection.function = function(function_name){
          "boLasso" = boLasso,
          "tsdSpecificCpG" = tsdSpecificCpG,
          "allCpG"= allCpG,
+         "wilcoxonSignedRankTest" = wilcoxonSignedRankTest,
          NULL
          )
 }
