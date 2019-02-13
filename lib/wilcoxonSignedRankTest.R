@@ -1,9 +1,8 @@
-library(exactRankTests)
-
-wilcoxonSignedRankTest = function(p_threshold = 0.05){
-  resource_name = 'E-MTAB-4664'
-
-  idats <- preprocessingIdats(readIdatsObj(resource_name))
+wilcoxonSignedRankTest = function(p_threshold = 0.05, idats = NULL){
+  if(is.null(idats)){
+    resource_name = 'E-MTAB-4664'
+    idats <- preprocessingIdats(readIdatsObj(resource_name), n = F)
+  }
   cpg_ids <- colnames(idats)
   assay_names <- rownames(idats)
 
@@ -31,6 +30,7 @@ wilcoxonSignedRankTest = function(p_threshold = 0.05){
       which_cpg <- append(which_cpg, ncpg)
     }
   }
-
-  return(t(rbind(cpg_ids[which_cpg], which_cpg)))
+  
+  return(which_cpg)
+  # return(t(rbind(cpg_ids[which_cpg], which_cpg)))
 }

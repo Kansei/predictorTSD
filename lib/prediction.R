@@ -4,7 +4,8 @@ prediction.glmnet = function(fit_model, test_X){
 }
 
 prediction.cv.glmnet = function(fit_model, test_X){
-  predicted <- predict.cv.glmnet(fit_model, s="lambda.min", newx=test_X)
+  predicted <- predict(fit_model, s="lambda.min", newx=test_X, type="response")
+  # predicted <- predict.cv.glmnet(fit_model, s="lambda.min", newx=test_X)
   return(predicted)
 }
 
@@ -15,8 +16,8 @@ prediction.logistic = function(fit_model, test_X){
 
 prediction.function = function(function_name){
   switch(function_name,
-    "lassoBinomal" = prediction.glmnet,
-    "lassoBinomal.cv" = prediction.cv.glmnet,
+    "lassoBinomial" = prediction.glmnet,
+    "lassoBinomial.cv" = prediction.cv.glmnet,
     "ridgeBinomial.cv" = prediction.cv.glmnet,
     "elasticNetBinomial.cv" = prediction.cv.glmnet,
     "adaptiveLassoBinomial.cv" = prediction.cv.glmnet,

@@ -4,3 +4,4 @@ rdata/*.rdata
 .RData
 .Rhistory
 *.png
+vendor

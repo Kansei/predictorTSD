@@ -47,18 +47,28 @@ standardize = function(data){
   return(scale(data))
 }
 
-preprocessingIdats = function(idats){
+preprocessingIdats = function(idats, s = T, m = T, n = T){
   # Perform all sample mean normalization
-  norm_idats <- normalize(idats)
-  #norm_idats <- idats
+  if(n){
+    idats <- normalize(idats)
+  }
   # Pick out Beta-value from idats
-  beta_value <- norm_idats@assayData[["betas"]]
+  beta.matrix <- idats@assayData[["betas"]]
+  
   # Convert beta-value to M-value
-  m_value <- convertBeta2M(beta_value)
-  # m_value <- beta_value
+  if(m){
+    methyl.matrix <- convertBeta2M(beta.matrix)  
+  }else{
+    methyl.matrix <- beta.matrix 
+  }
   # Except missing value
-  excepted_m_value <- exceptMissingValue(m_value)
+  methyl.matrix <- exceptMissingValue(methyl.matrix)
+  
   # Transpose matrix to reformat (barcode_name x cpg_sites)
-  X <- standardize(t(excepted_m_value))
+  if(s){
+    X <- standardize(t(methyl.matrix))
+  }else{
+    X <- t(methyl.matrix)
+  }
   return(X)
 }
