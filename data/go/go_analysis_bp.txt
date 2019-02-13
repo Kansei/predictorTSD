@@ -1,0 +1,58 @@
+
+
+
+
+
+Analysis Type:	PANTHER Overrepresentation Test (Released 20181113)
+Annotation Version and Release Date:	PANTHER version 14.0 Released 2018-12-03
+Analyzed List:	Client Text Box Input (Homo sapiens)
+Reference List:	Homo sapiens (all genes in database)
+Test Type:	FISHER
+Correction:	NONE
+PANTHER GO-Slim Biological Process	Homo sapiens - REFLIST (20996)	Client Text Box Input (90)	Client Text Box Input (expected)	Client Text Box Input (over/under)	Client Text Box Input (fold Enrichment)	Client Text Box Input (raw P-value)
+dendritic spine organization (GO:0097061)	3	1	.01	+	77.76	1.70E-02
+DNA duplex unwinding (GO:0032508)	4	1	.02	+	58.32	2.12E-02
+Golgi to endosome transport (GO:0006895)	4	1	.02	+	58.32	2.12E-02
+protein localization to Golgi apparatus (GO:0034067)	9	2	.04	+	51.84	9.66E-04
+positive regulation of neuron projection development (GO:0010976)	10	2	.04	+	46.66	1.16E-03
+liver development (GO:0001889)	5	1	.02	+	46.66	2.53E-02
+cytosolic transport (GO:0016482)	6	1	.03	+	38.88	2.95E-02
+DNA geometric change (GO:0032392)	7	1	.03	+	33.33	3.36E-02
+folic acid-containing compound metabolic process (GO:0006760)	7	1	.03	+	33.33	3.36E-02
+positive regulation of phosphorus metabolic process (GO:0010562)	7	1	.03	+	33.33	3.36E-02
+positive regulation of phosphate metabolic process (GO:0045937)	7	1	.03	+	33.33	3.36E-02
+cellular response to lipid (GO:0071396)	7	1	.03	+	33.33	3.36E-02
+telomere maintenance via telomere lengthening (GO:0010833)	15	2	.06	+	31.11	2.35E-03
+cytoplasmic mRNA processing body assembly (GO:0033962)	8	1	.03	+	29.16	3.78E-02
+deadenylation-dependent decapping of nuclear-transcribed mRNA (GO:0000290)	8	1	.03	+	29.16	3.78E-02
+bone morphogenesis (GO:0060349)	18	2	.08	+	25.92	3.26E-03
+reciprocal meiotic recombination (GO:0007131)	9	1	.04	+	25.92	4.19E-02
+response to retinoic acid (GO:0032526)	9	1	.04	+	25.92	4.19E-02
+interstrand cross-link repair (GO:0036297)	9	1	.04	+	25.92	4.19E-02
+Golgi to plasma membrane protein transport (GO:0043001)	9	1	.04	+	25.92	4.19E-02
+actin filament depolymerization (GO:0030042)	10	1	.04	+	23.33	4.60E-02
+lamellipodium assembly (GO:0030032)	10	1	.04	+	23.33	4.60E-02
+mitotic recombination (GO:0006312)	10	1	.04	+	23.33	4.60E-02
+DNA damage checkpoint (GO:0000077)	10	1	.04	+	23.33	4.60E-02
+positive regulation of cell projection organization (GO:0031346)	22	2	.09	+	21.21	4.68E-03
+telomere maintenance (GO:0000723)	36	3	.15	+	19.44	6.15E-04
+telomere organization (GO:0032200)	36	3	.15	+	19.44	6.15E-04
+plasma membrane bounded cell projection organization (GO:0120036)	34	2	.15	+	13.72	1.03E-02
+animal organ morphogenesis (GO:0009887)	69	3	.30	+	10.14	3.63E-03
+developmental growth (GO:0048589)	50	2	.21	+	9.33	2.08E-02
+chromosome organization (GO:0051276)	87	3	.37	+	8.04	6.76E-03
+growth (GO:0040007)	61	2	.26	+	7.65	2.97E-02
+muscle contraction (GO:0006936)	125	4	.54	+	7.47	2.28E-03
+muscle system process (GO:0003012)	130	4	.56	+	7.18	2.61E-03
+positive regulation of hydrolase activity (GO:0051345)	68	2	.29	+	6.86	3.61E-02
+regulation of cell projection organization (GO:0031344)	72	2	.31	+	6.48	3.99E-02
+double-strand break repair (GO:0006302)	74	2	.32	+	6.31	4.19E-02
+ER to Golgi vesicle-mediated transport (GO:0006888)	77	2	.33	+	6.06	4.49E-02
+organelle assembly (GO:0070925)	81	2	.35	+	5.76	4.91E-02
+anatomical structure morphogenesis (GO:0009653)	168	3	.72	+	4.17	3.69E-02
+vesicle-mediated transport (GO:0016192)	287	5	1.23	+	4.06	8.31E-03
+negative regulation of transcription, DNA-templated (GO:0045892)	177	3	.76	+	3.95	4.19E-02
+negative regulation of cellular macromolecule biosynthetic process (GO:2000113)	185	3	.79	+	3.78	4.66E-02
+system process (GO:0003008)	493	6	2.11	+	2.84	2.00E-02
+intracellular transport (GO:0046907)	790	8	3.39	+	2.36	2.07E-02
+establishment of localization in cell (GO:0051649)	809	8	3.47	+	2.31	2.34E-02

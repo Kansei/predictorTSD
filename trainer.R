@@ -38,14 +38,9 @@ model_name = "elasticNetBinomial.cv"
 fit_model <- model.function(model_name)(train_X, train_Y)
 # saveCoef(fit_model, colnames(train_X[, which_cpg]))
 
-predicted <- prediction.function(model_name)(fit_model, train_X)
-auc <- rocAUC(predicted, train_Y)
-print("AUC(Train):")
-print(auc)
-
 predicted <- prediction.function(model_name)(fit_model, test_X)
 auc <- rocAUC(predicted, test_Y)
-print("AUC(Test):")
+print("AUC:")
 print(auc)
 
 # saveModel(result)
