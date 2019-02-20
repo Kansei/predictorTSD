@@ -3,11 +3,11 @@ require 'csv'
 
 cpg_csv = CSV.read("./data/coef.csv")
 
-caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {args: ["--headless", "--disable-gpu"]})
-driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
+url = "https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr13%3A24914658-24914658&hgsid=711512927_regVQAvxAEg1frIsbxXsUj3AMZci"
 
-url = "https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19" 
-
+#caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {args: ["--headless", "--disable-gpu"]})
+#driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
+driver = Selenium::WebDriver.for :chrome
 driver.navigate.to url
 
 cpg_position = cpg_csv[2..-1].map do |cpg|

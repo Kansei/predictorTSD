@@ -25,8 +25,11 @@ model.elasticNetBinomial.cv = function(x, y){
   result <- cv.glmnet(x, y, family="binomial", alpha=0.5, standardize = TRUE, nfolds=length(y), type.measure="deviance", grouped=F)
   print("lambda:")
   print(result$lambda.min)
-  coef = coef(result, s = result$lambda.min)
-  print(colnames(x)[which(coef[-1] != 0)])
+  coef <- coef(result, s = result$lambda.min)
+  cpg_id <- c("intercept", colnames(x)[which(coef[-1] != 0)])
+  coef <- coef[coef != 0]
+  write.csv(data.frame(cpg_id, coef), "./data/coef.csv")
+  
   return(result)
 }
 
@@ -39,6 +42,7 @@ model.adaptiveLassoBinomial.cv = function(x, y){
   print(result$lambda.min)
   coef = coef(result, s = result$lambda.min)
   print(colnames(x)[which(coef[-1] != 0)])
+  
   return(result)
 }
 
